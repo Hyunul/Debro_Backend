@@ -1,9 +1,9 @@
 var mysql = require("mysql2");
 var db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "1234",
-  database: "db_test",
+  host: "capstone-db.cfdsrnexrnxy.ap-northeast-2.rds.amazonaws.com",
+  user: "admin",
+  password: "12341234",
+  database: "nodejs",
 });
 db.connect();
 
