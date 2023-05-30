@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 
 var indexRouter = require('./routes/index');
-var authRouter = require('./routes/auth');
 const bodyParser = require('body-parser');
 
 var app = express();
@@ -20,7 +19,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', indexRouter);
-app.use('/auth', authRouter);
 
 require('./routes/sensor.js')(app);
 

@@ -10,6 +10,7 @@ exports.create = (req, res) => {
     const sensor = new Sensor({
         humidity: req.body.humidity,
         temperature: req.body.temperature,
+        moisture: req.body.moisture,
     });
 
     Sensor.create(sensor, (err, data) => {

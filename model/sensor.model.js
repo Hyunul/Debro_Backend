@@ -3,6 +3,7 @@ const sql = require('../routes/db.js');
 const Sensor = function (sensor) {
     this.humidity = sensor.humidity;
     this.temperature = sensor.temperature;
+    this.moisture = sensor.moisture;
 };
 
 Sensor.create = (newSensor, result) => {
