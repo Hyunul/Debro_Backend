@@ -19,6 +19,7 @@ exports.create = (req, res) => {
                 message: err.message || 'Some error occurred while creating the Sensor.',
             });
         }
+        return res.send({ success: true });
     });
 };
 
@@ -29,6 +30,7 @@ exports.findAll = (req, res) => {
                 message: err.message || 'Some error occurred while retrieving sensor.',
             });
         }
+        return res.send({ data });
     });
 };
 
