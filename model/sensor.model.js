@@ -30,7 +30,7 @@ Sensor.getAll = (result) => {
     });
 };
 
-Sensor.findByID = (sensorID, result) => {
+Sensor.findById = (sensorID, result) => {
     sql.query('SELECT * FROM sensor_data WHERE id = ?', sensorID, (err, res) => {
         if (err) {
             console.log('error: ', err);
