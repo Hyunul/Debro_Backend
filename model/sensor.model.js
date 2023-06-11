@@ -18,18 +18,6 @@ Sensor.create = (newSensor, result) => {
     });
 };
 
-Sensor.getAll = (result) => {
-    sql.query('SELECT * FROM sensor_data', (err, res) => {
-        if (err) {
-            console.log('error: ', err);
-            result(null, err);
-            return;
-        }
-        console.log('sensor: ', res);
-        result(null, res);
-    });
-};
-
 Sensor.findById = (sensorID, result) => {
     sql.query('SELECT * FROM sensor_data WHERE id = ?', sensorID, (err, res) => {
         if (err) {
@@ -46,6 +34,37 @@ Sensor.findById = (sensorID, result) => {
 
         // 결과가 없을 시
         result({ kind: 'not_found' }, null);
+    });
+};
+
+Sensor.getAll = (result) => {
+    sql.query('SELECT * FROM sensor_data', (err, res) => {
+        if (err) {
+            console.log('error: ', err);
+            result(null, err);
+            return;
+        }
+        console.log('sensor: ', res);
+        result(null, res);
+    });
+};
+
+Sensor.remove = (sensorID, result) => {
+    sql.query('DELETE FROM sensor_data WHERE id = ?', sensorID, (err, res) => {
+        if (err) {
+            console.log('error: ', err);
+            result(err, null);
+            return;
+        }
+
+        if (res.affectedRows == 0) {
+            // 결과가 없을 시
+            result({ kind: 'not_found' }, null);
+            return;
+        }
+
+        console.log('deleted customer with id: ', sensorID);
+        result(null, res);
     });
 };
 
