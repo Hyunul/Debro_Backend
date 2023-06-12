@@ -35,19 +35,14 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.findOne = (req, res) => {
-    Sensor.findById(req.params.sensorId, (err, data) => {
+exports.findRecent = (req, res) => {
+    Sensor.findRecent((err, data) => {
         if (err) {
-            if (err.kind === 'not_found') {
-                res.statue(404).send({
-                    message: `Not found Sensor with id ${req.params.sensorId}.`,
-                });
-            } else {
-                res.statue(500).send({
-                    message: `Error retrieving Sensor with id ${req.params.sensorId}.`,
-                });
-            }
-        } else res.send(data);
+            res.statue(500).send({
+                message: err.message || 'Some error occurred while retrieving sensor.',
+            });
+        }
+        return res.send({ data });
     });
 };
 
