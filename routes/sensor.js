@@ -5,7 +5,7 @@ module.exports = (app) => {
 
     app.get('/sensor', sensor.findAll);
 
-    app.get('/sensor/:sensorId', sensor.findOne);
+    app.get('/sensor/recent', sensor.findRecent);
 
     app.delete('/sensor/:sensorId', sensor.delete);
 };

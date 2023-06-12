@@ -18,22 +18,15 @@ Sensor.create = (newSensor, result) => {
     });
 };
 
-Sensor.findById = (sensorID, result) => {
-    sql.query('SELECT * FROM sensor_data WHERE id = ?', sensorID, (err, res) => {
+Sensor.findRecent = (result) => {
+    sql.query('SELECT * FROM sensor_data', (err, res) => {
         if (err) {
             console.log('error: ', err);
-            result(err, null);
+            result(null, err);
             return;
         }
-
-        if (res.length) {
-            console.log('found customer: ', res[0]);
-            result(null, res[0]);
-            return;
-        }
-
-        // 결과가 없을 시
-        result({ kind: 'not_found' }, null);
+        console.log('sensor: ', res[res.length - 1]);
+        result(null, res[res.length - 1]);
     });
 };
 
