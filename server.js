@@ -1,7 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-
+const { swaggerUi, specs } = require('./modules/swagger');
 var indexRouter = require('./routes/index');
 const bodyParser = require('body-parser');
 
@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', indexRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 require('./routes/sensor.js')(app);
 require('./routes/plant.js')(app);
