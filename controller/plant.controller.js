@@ -8,7 +8,11 @@ exports.create = (req, res) => {
     }
 
     const plant = new Plant({
-        length: req.body.length,
+        // length: req.body.length,
+        plantName: req.body.plantName,
+        address: req.body.address,
+        isOutside: req.body.isOutside,
+        selectedTitle: req.body.selectedTitle,
     });
 
     Plant.create(plant, (err, data) => {
