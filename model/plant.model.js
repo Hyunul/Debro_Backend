@@ -2,6 +2,10 @@ const sql = require('../routes/db.js');
 
 const Plant = function (plant) {
     this.length = plant.length;
+    this.plantName = plant.plantName;
+    this.address = plant.address;
+    this.isOutside = plant.isOutside;
+    this.selectedTitle = plant.selectedTitle;
 };
 
 Plant.create = (newPlant, result) => {
