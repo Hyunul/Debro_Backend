@@ -1,4 +1,5 @@
 const Plant = require('../model/plant.model.js');
+const url = require('url');
 
 exports.create = (req, res) => {
     if (!req.body) {
@@ -9,6 +10,7 @@ exports.create = (req, res) => {
 
     const plant = new Plant({
         // length: req.body.length,
+        userName: req.body.userName,
         plantName: req.body.plantName,
         address: req.body.address,
         isOutside: req.body.isOutside,
@@ -28,6 +30,8 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
+    const urlQuery = url.parse(req.url, true).query;
+    // console.log(urlQuery)
     Plant.getAll((err, data) => {
         if (err) {
             res.statue(500).send({

@@ -1,12 +1,14 @@
 const sql = require('../routes/db.js');
 
 const Plant = function (plant) {
-    // this.length = plant.length;
+    this.length = plant.length;
+    this.userName = plant.userName;
     this.plantName = plant.plantName;
     this.address = plant.address;
     this.isOutside = plant.isOutside;
     this.selectedTitle = plant.selectedTitle;
 };
+
 
 Plant.create = (newPlant, result) => {
     sql.query('SELECT * FROM plant_data', (err, res) => {
@@ -15,25 +17,26 @@ Plant.create = (newPlant, result) => {
             result(null, err);
             return;
         }
-        if (res.length == 0) {
-            sql.query('INSERT INTO plant_data SET ?', newPlant, (err, res) => {
-                if (err) {
-                    console.log('error: ', err);
-                    result(err, null);
-                    return;
-                }
-                result(null, { id: res.insertId, ...newPlant });
-            });
-        } else if (newPlant.length > res[res.length - 1].length) {
-            sql.query('INSERT INTO plant_data SET ?', newPlant, (err, res) => {
-                if (err) {
-                    console.log('error: ', err);
-                    result(err, null);
-                    return;
-                }
-                result(null, { id: res.insertId, ...newPlant });
-            });
-        } sql.query('INSERT INTO plant_data SET ?', newPlant, (err, res) => {
+        // if (res.length == 0) {
+        //     sql.query('INSERT INTO plant_data SET ?', newPlant, (err, res) => {
+        //         if (err) {
+        //             console.log('error: ', err);
+        //             result(err, null);
+        //             return;
+        //         }
+        //         result(null, { id: res.insertId, ...newPlant });
+        //     });
+        // } else if (newPlant.length > res[res.length - 1].length) {
+        //     sql.query('INSERT INTO plant_data SET ?', newPlant, (err, res) => {
+        //         if (err) {
+        //             console.log('error: ', err);
+        //             result(err, null);
+        //             return;
+        //         }
+        //         result(null, { id: res.insertId, ...newPlant });
+        //     });
+        // } 
+        sql.query('INSERT INTO plant_data SET ?', newPlant, (err, res) => {
             if (err) {
                 console.log('error: ', err);
                 result(err, null);
@@ -42,7 +45,6 @@ Plant.create = (newPlant, result) => {
             result(null, { id: res.insertId, ...newPlant });
         });
         // else {
-        //     console.log("here")
         //     result(null, null);
         //     return;
         // }
@@ -61,7 +63,7 @@ Plant.findRecent = (result) => {
     });
 };
 
-Plant.getAll = (result) => {
+Plant.getAll = (req, result) => {
     sql.query('SELECT * FROM plant_data', (err, res) => {
         if (err) {
             console.log('error: ', err);
@@ -74,7 +76,7 @@ Plant.getAll = (result) => {
 };
 
 Plant.remove = (plantID, result) => {
-    sql.query('DELETE FROM plant_data WHERE id = ?', plantID, (err, res) => {
+    sql.query('DELETE FROM plant_data WHERE plantNumber = ?', plantID, (err, res) => {
         if (err) {
             console.log('error: ', err);
             result(err, null);
@@ -87,9 +89,13 @@ Plant.remove = (plantID, result) => {
             return;
         }
 
-        console.log('deleted customer with id: ', sensorID);
+        console.log('deleted plant with id: ', plantID);
         result(null, res);
     });
+
+    sql.query('SET @count=0')
+    sql.query('UPDATE plant_data SET plantNumber=@count:=@count+1')
+
 };
 
 module.exports = Plant;
