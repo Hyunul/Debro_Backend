@@ -44,6 +44,9 @@ Plant.create = (newPlant, result) => {
             }
             result(null, { id: res.insertId, ...newPlant });
         });
+
+        sql.query('SET @count=0')
+        sql.query('UPDATE plant_data SET plantNumber=@count:=@count+1')
         // else {
         //     result(null, null);
         //     return;
