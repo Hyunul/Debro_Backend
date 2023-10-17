@@ -63,14 +63,14 @@ Plant.findRecent = (result) => {
     });
 };
 
-Plant.getAll = (req, result) => {
+Plant.getAll = (result) => {
     sql.query('SELECT * FROM plant_data', (err, res) => {
         if (err) {
             console.log('error: ', err);
             result(null, err);
             return;
         }
-        console.log('sensor: ', res);
+        console.log('plant: ', res);
         result(null, res);
     });
 };

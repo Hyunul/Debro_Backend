@@ -30,8 +30,6 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    const urlQuery = url.parse(req.url, true).query;
-    // console.log(urlQuery)
     Plant.getAll((err, data) => {
         if (err) {
             res.statue(500).send({
