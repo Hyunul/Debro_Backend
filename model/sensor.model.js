@@ -41,6 +41,18 @@ Sensor.getAll = (result) => {
     });
 };
 
+Sensor.findOne = (sensorID, result) => {
+    sql.query('SELECT * FROM sensor_data where id = ?', sensorID, (err, res) => {
+        if (err) {
+            console.log('error: ', err);
+            result(null, err);
+            return;
+        }
+        console.log('sensor: ', res);
+        result(null, res);
+    });
+};
+
 Sensor.remove = (sensorID, result) => {
     sql.query('DELETE FROM sensor_data WHERE id = ?', sensorID, (err, res) => {
         if (err) {

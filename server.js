@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 const { swaggerUi, specs } = require('./modules/swagger');
 var indexRouter = require('./routes/index');
+var weatherRouter = require('./routes/weather');
 const bodyParser = require('body-parser');
 
 var app = express();
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', indexRouter);
+app.use('/weather', weatherRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 require('./routes/sensor.js')(app);
