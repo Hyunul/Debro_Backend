@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
                 objectlists.push(i.Key);
             }
             console.log('objectlists : ', objectlists);
-            return objectlists;
+            return res.send(objectlists), objectlists;
         })
         .catch((error) => {
             console.error(error);
