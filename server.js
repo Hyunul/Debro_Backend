@@ -29,6 +29,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 require('./routes/sensor.js')(app);
 require('./routes/plant.js')(app);
+require('./routes/length.js')(app);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

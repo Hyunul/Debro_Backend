@@ -1,7 +1,6 @@
 const sql = require('../routes/db.js');
 
 const Plant = function (plant) {
-    this.length = plant.length;
     this.userName = plant.userName;
     this.plantName = plant.plantName;
     this.address = plant.address;
