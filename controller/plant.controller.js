@@ -9,7 +9,6 @@ exports.create = (req, res) => {
     }
 
     const plant = new Plant({
-        // length: req.body.length,
         userName: req.body.userName,
         plantName: req.body.plantName,
         address: req.body.address,

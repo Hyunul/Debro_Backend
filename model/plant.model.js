@@ -1,7 +1,6 @@
 const sql = require('../routes/db.js');
 
 const Plant = function (plant) {
-    this.length = plant.length;
     this.userName = plant.userName;
     this.plantName = plant.plantName;
     this.address = plant.address;
@@ -17,25 +16,7 @@ Plant.create = (newPlant, result) => {
             result(null, err);
             return;
         }
-        // if (res.length == 0) {
-        //     sql.query('INSERT INTO plant_data SET ?', newPlant, (err, res) => {
-        //         if (err) {
-        //             console.log('error: ', err);
-        //             result(err, null);
-        //             return;
-        //         }
-        //         result(null, { id: res.insertId, ...newPlant });
-        //     });
-        // } else if (newPlant.length > res[res.length - 1].length) {
-        //     sql.query('INSERT INTO plant_data SET ?', newPlant, (err, res) => {
-        //         if (err) {
-        //             console.log('error: ', err);
-        //             result(err, null);
-        //             return;
-        //         }
-        //         result(null, { id: res.insertId, ...newPlant });
-        //     });
-        // } 
+        
         sql.query('INSERT INTO plant_data SET ?', newPlant, (err, res) => {
             if (err) {
                 console.log('error: ', err);
